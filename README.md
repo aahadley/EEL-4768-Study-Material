@@ -28,6 +28,8 @@
                 - Restrictive in parallelism
                 - Long assembly codes
 
+![ac](http://puu.sh/BEJ3e/e7b098f53e.png)
+
 ####        Stack:
 
             Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed.
@@ -39,6 +41,8 @@
             Cons:
                 - Restrictive in parallelism
                 - Long assembly codes
+
+![st](http://puu.sh/BEJ3M/fed3ce44b7.png)
 
 ####        Memory-Memory:
 
@@ -64,6 +68,8 @@
                 - Some instructions require many clock cycles.
                 - Complex encoding
 
+![rm](http://puu.sh/BEJ4i/093b34401e.png)
+
 ####        Load-Store:
 
             Sometimes called register-register achitecture, the ALU takes both inputs from the registers.
@@ -76,6 +82,8 @@
             Cons:
                 - Long Code
                 - Every variable requires load and store instructions.
+
+![ls](http://puu.sh/BEJ4Y/5f242b7fd6.png)
 
 ###     Big Endian vs Little Endian:
 
