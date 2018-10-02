@@ -17,8 +17,8 @@
 ####        Accumulator:
 
             Accumulator architectures were common in early CPUs when it was not possible to have a lot of
-            registers. The accumulator is used in all operations. It is not used anymore due to its rigidity
-            and long assembly code.
+            registers. The accumulator is used in all operations. It is not used anymore due to its
+            rigidity and long assembly code.
 
             Pros:
                 - Simple compiler
@@ -77,9 +77,25 @@
                 - Long Code
                 - Every variable requires load and store instructions.
 
-
-###     Alignments:
 ###     Big Endian vs Little Endian:
+
+        Big Endian:
+            Data type ends at the big address.
+
+            0x012EAC34                    "ABCD"
+            +----+----+----+----+       +---+---+---+---+
+            | 01 | 2E | AC | 34 |       | A | B | C | D |
+            +----+----+----+----+       +---+---+---+---+
+
+        Little Endian:
+            Data tyoe ends at the little address.
+
+            0x012EAC34                  "ABCD"
+            +----+----+----+----+       +---+---+---+---+
+            | 34 | AC | 2E | 01 |       | D | C | B | A |
+            +----+----+----+----+       +---+---+---+---+
+            
+###     Alignments:
 ###     Instruction Format:
 ###     Fields:
 
