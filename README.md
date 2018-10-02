@@ -16,7 +16,9 @@
 
 ####        Accumulator:
 
-            Accumulator architectures were common in early CPUs when it was not possible to have a lot of registers. The accumulator is used in all operations. It is not used anymore due to its rigidity and long assembly code.
+            Accumulator architectures were common in early CPUs when it was not possible to have a lot of
+            registers. The accumulator is used in all operations. It is not used anymore due to its rigidity
+            and long assembly code.
 
             Pros:
                 - Simple compiler
@@ -28,7 +30,8 @@
 
 ####        Stack:
 
-            Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed. Data from memory can be pushed to the stack and data on the stack can be popped into memory.
+            Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed.
+            Data from memory can be pushed to the stack and data on the stack can be popped into memory.
 
             Pros:
                 - Simple compiler
@@ -49,7 +52,8 @@
 
 ####        Register-Memory:
 
-            Operates directly on data within the memory. The ALU can take one input from the registers, and one from memory, or it can take both operations from the registers.
+            Operates directly on data within the memory. The ALU can take one input from the registers,
+            and one from memory, or it can take both operations from the registers.
 
             Pros:
                 - Data in memory can be accessed directly.
@@ -62,7 +66,8 @@
 
 ####        Load-Store:
 
-            Sometimes called register-register achitecture, the ALU takes both inputs from the registers. As a result, it can't access memory directly.
+            Sometimes called register-register achitecture, the ALU takes both inputs from the registers.
+            As a result, it can't access memory directly.
 
             Pros:
                 - Simple encoding
