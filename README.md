@@ -94,8 +94,11 @@
             +----+----+----+----+       +---+---+---+---+
             | 34 | AC | 2E | 01 |       | D | C | B | A |
             +----+----+----+----+       +---+---+---+---+
-            
+
 ###     Alignments:
+
+        ![fig](https://puu.sh/BEIJt/e36308fc1f.jpg)
+        
 ###     Instruction Format:
 ###     Fields:
 
