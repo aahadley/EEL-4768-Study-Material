@@ -97,6 +97,11 @@
 
 ###     Alignments:
 
+    Objects larger than 1 byte must be aligned.
+    An access to an object s at address A is aligned if A mod s = 0.
+    Misalignment is a problem because accessing a misaligned object may require access to multiple
+    aligned addresses.
+
 ![fig](https://puu.sh/BEIJt/e36308fc1f.jpg)
 
 ###     Instruction Format:
