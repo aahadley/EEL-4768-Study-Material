@@ -5,7 +5,74 @@
 > True / false or multiple choice about: ISA definition, classification/ comparison, alignments, big vs little endian, instruction format, fields,
 
 ###     ISA Definition:
+
+    An ISA consists of:
+    - List of all instructions 
+    - The format of the instructions
+    - The addressing modes.
+
+
 ###     ISA Classification/Comparison:
+
+####        Accumulator:
+
+            Accumulator architectures were common in early CPUs when it was not possible to have a lot of registers. The accumulator is used in all operations. It is not used anymore due to its rigidity and long assembly code.
+
+            Pros:
+                - Simple compiler
+                - Simple hardware
+            Cons:
+                - Rigid
+                - Restrictive in parallelism
+                - Long assembly codes
+
+####        Stack:
+
+            Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed. Data from memory can be pushed to the stack and data on the stack can be popped into memory.
+
+            Pros:
+                - Simple compiler
+                - Simple hardware
+            Cons:
+                - Restrictive in parallelism
+                - Long assembly codes
+
+####        Memory-Memory:
+
+            No registers are used. All data is kept in the computer's main memory. slow as hecc
+
+            Pros:
+                - Variables don't have to be allocated. Easy memory management
+            Cons:
+                - Every operation requires multiple memory accesses. (ew)
+                - Slow
+
+####        Register-Memory:
+
+            Operates directly on data within the memory. The ALU can take one input from the registers, and one from memory, or it can take both operations from the registers.
+
+            Pros:
+                - Data in memory can be accessed directly.
+                - Simple compiler
+                - Short code
+            Cons:
+                - Non-uniform instructions
+                - Some instructions require many clock cycles.
+                - Complex encoding
+
+####        Load-Store:
+
+            Sometimes called register-register achitecture, the ALU takes both inputs from the registers. As a result, it can't access memory directly.
+
+            Pros:
+                - Simple encoding
+                - Few bits required to specify registers.
+                - Uniform procesing.
+            Cons:
+                - Long Code
+                - Every variable requires load and store instructions.
+
+
 ###     Alignments:
 ###     Big Endian vs Little Endian:
 ###     Instruction Format:
