@@ -334,6 +334,48 @@ SD      R1, 1200(R0)    # i <-- R1
 * slooow
 
 ###     Components:
+
+#### Fetch
+
+#####   Consists of:
+
+* Program Counter
+* Instruction Memory
+* Adder
+
+![fetch](https://puu.sh/BESf9/4412b4ecd0.png)
+
+---
+
+#### Execute
+
+##### Consists of:
+
+* Register File
+* ALU
+* Data Memory
+
+![ex](https://puu.sh/BESlH/52a49906e3.png)
+
+---
+
+#### Decode
+
+Because some components can take multiple different inputs, we need to add multiplexers so those components can choose their input.
+Each multiplexer is connected to a control signal.
+
+![control](https://puu.sh/BESsc/b7f6464e86.png)
+
+---
+
+#### Sign Extender and Shifter
+The ALU requires 32-bit inputs, but the immediate field is only 16 bits, so we sign-extend 16 bits. 
+Likewise,we need to calculate 32-but offsets for load, store, and branch instructions.
+A shifter is added to easily multiply the address offset by 4.
+
+![se](https://puu.sh/BESDl/697bf50093.png)
+---
+
 ###     Control Signals: (and format)
 
 ![cs](https://puu.sh/BERp1/af1bfffa9d.png)
