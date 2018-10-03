@@ -150,6 +150,18 @@ Jump, Jump-and-Link
     +------+--------------------------+
 
 ---
+
+### Addressing Modes
+
+|            Mode | Example Instruction | Pseudocode                                |
+|-----------------|---------------------|-------------------------------------------|
+|Register Indirect| Add R4(R1)          | Regs[R4] <-- Regs[R4] + Mem[Regs[R1]]     |
+|Immediate        | Add R4, 3           | Regs[R4] <-- Regs[R4] + 3                 |
+|Memory Indirect  | Add R1, @(R3)       | Regs[R1] <-- Regs[R1] + Mem[Mem[Regs[R3]]]|
+|Autoincrement    | Add R1, (R2)+       | Regs[R1] <-- Regs[R1] + Mem[Regs[R2]++]   |
+|Scaled           | Add R1, 100(R2)[R3] | Regs[R1] <-- + Mem[100 + Regs[R2] + Regs[R3] * d]|
+
+---
 ---
 ---
 
