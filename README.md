@@ -28,6 +28,8 @@
 
 ![ac](https://puu.sh/BEJ3e/e7b098f53e.png)
 
+---
+
 ####        Stack:
 
 </p> Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed. 
@@ -43,6 +45,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 
 ![st](https://puu.sh/BEJ3M/fed3ce44b7.png)
 
+---
+
 ####        Memory-Memory:
 
 </p> No registers are used. All data is kept in the computer's main memory. slow as hecc </p>
@@ -52,6 +56,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 ##### Cons:
 * Every operation requires multiple memory accesses. (ew)
 * Slow
+
+---
 
 ####        Register-Memory:
 
@@ -68,6 +74,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 
 ![rm](https://puu.sh/BEJ4i/093b34401e.png)
 
+---
+
 ####        Load-Store:
 
 </p> Sometimes called register-register achitecture, the ALU takes both inputs from the registers.As a result, it can't access memory directly. </p>
@@ -81,6 +89,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 * Every variable requires load and store instructions.
 
 ![ls](https://puu.sh/BEJ4Y/5f242b7fd6.png)
+
+---
 
 ###     Big Endian vs Little Endian:
 
@@ -100,6 +110,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
             | 34 | AC | 2E | 01 |       | D | C | B | A |
             +----+----+----+----+       +---+---+---+---+
 
+---
+
 ###     Alignments:
 
 * Objects larger than 1 byte must be aligned.
@@ -108,6 +120,8 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 
 
 ![fig](https://puu.sh/BEIJt/e36308fc1f.jpg)
+
+---
 
 ###     Instruction Format:
 ####        R-Type:
@@ -125,6 +139,10 @@ architecture, i.e. load-store, or register-memory, stack etc., instructions will
 ###     Register-Memory:
 ###     Stack:
 ###     ...
+
+---
+---
+---
 
 ##  MIPS 64:
 
@@ -293,6 +311,10 @@ SD      R1, 1200(R0)    # i <-- R1
 
 
 ####        while loop:
+
+---
+---
+---
 
 ##  Single Cycle Datapath:
 
