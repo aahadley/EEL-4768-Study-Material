@@ -137,7 +137,7 @@ will be included, in addition to the list of MIPS64 instructions.
 |a2 – b| < epsilon 
 ```
 
-```Assembly
+```
 .data
 a:      .float 0.1
 b:      .float 0.01
@@ -153,8 +153,13 @@ LA      R3, e
 L.S     F0, 0(R1)
 L.S     F1, 0(R2)
 L.S     F2, 0(R3)
-
-
+MUL.s   F0, F0, F0
+SUB.S   F3, F0, F1
+ABS.S   F3, F3
+C.LT.S  F3, F2
+BC1F    not_quite
+...
+not_quite
 ```
 ####        if-else:
 ####        while loop:
