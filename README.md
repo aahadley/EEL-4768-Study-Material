@@ -132,7 +132,8 @@ architecture, i.e. load-store, or register-memory, stack etc., instructions will
 will be included, in addition to the list of MIPS64 instructions.
 
 ###     Translate c-like code into MIPS64:
-####        various examples
+####        Comparing Floats
+
 ```C
 |a2 – b| < epsilon
 ```
@@ -174,6 +175,7 @@ mfc1    R2, F31
 add     R3, R1, R2
 ```
 
+####        Working with Double Words
 ```C
 // Load the 64-bit number 0x11223344 AABBCCDD to n.
 
@@ -182,7 +184,7 @@ n = 0x11223344AABBCCDD
 ```
 
 ```assembly
-# /* x represents a garbage value */
+# x represents a garbage value
 .data
 n:      .word 0
 
@@ -206,8 +208,60 @@ LA      R30, n
 SD      R1, 0[R30]          # store R1 at the address of n (syntax highlighting wants brackets, idk)
 ```
 
+####        Floating Point Arithmetic
+```C
+long long int a, b, c;
+float avg;
+
+avg = (float) (a + b + c) / 3;
+```
+
+```assembly
+.data
+a:  .word  ... @1000
+b:  .word  ... @1008
+c:  .word  ... @1016
+avg .float ... @2000
+
+.text
+LD      R1, 1000(R0)    # load a
+LD      R2, 1008(R0)    # load b
+LD      R3, 1016(R0)    # load c
+DADD    R4, R1, R2      # double word add
+DADD    R4, R4. R3
+MTC1    R4, F0          # move the sum to FPR
+CVT.s.L F0, F0          # convert to single precision
+LI.S    F1, 3
+DIV.S   F2, F0, F1
+S.S     F2, 2000(R0)
+```
 
 ####        if-else:
+```C
+long long int a, b, f;
+
+if(A == 0 && B == 25)
+    f = a + b
+```
+
+```assembly
+.data
+a:  .word ... @800
+b:  .word ... @808
+f:  .word ... @816
+
+.text
+LD      R1, 800(R0)     # R1 <-- a
+BNE     R1, R0, Exit    # If a != 0 , exit
+LD      R2, 808(R0)     # R2 <-- B
+DADDI   R3, R0, 25      # R3 <-- 25
+BNE     R2, R3, Exit    # if b != 25 , exit
+DADD    R4, R1, R2
+SD      R4, 816(R0)     # f <- R4
+
+Exit:
+``` 
+
 ####        while loop:
 ####        for loop:
 
