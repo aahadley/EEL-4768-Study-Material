@@ -179,7 +179,7 @@ add     R3, R1, R2
 ```C
 // Load the 64-bit number 0x11223344 AABBCCDD to n.
 
-long long int n = 0;
+__int64_t n = 0;    // equivalent to long long, used for specificity
 n = 0x11223344AABBCCDD
 ```
 
@@ -210,7 +210,7 @@ SD      R1, 0[R30]          # store R1 at the address of n (syntax highlighting 
 
 ####        Floating Point Arithmetic
 ```C
-long long int a, b, c;
+__int64_t a, b, c;
 float avg;
 
 avg = (float) (a + b + c) / 3;
@@ -238,7 +238,7 @@ S.S     F2, 2000(R0)
 
 ####        if-else:
 ```C
-long long int a, b, f;
+__int64_t a, b, f;
 
 if(A == 0 && B == 25)
     f = a + b
@@ -262,8 +262,37 @@ SD      R4, 816(R0)     # f <- R4
 Exit:
 ``` 
 
-####        while loop:
 ####        for loop:
+```C
+__int64_t a[100];   // a at 2400
+__int64_t b[100];   // b at 4800
+__int64_t c, i;     // c at 1000, i at 1200
+
+for(i = 0; i < 100; i++)
+    a[i] = b[i] + c;
+```
+
+```assembly
+.text
+
+DADD    R1, R0, R0      # R1 := i = 0
+LD      R2, 1000(R0)    # R2 <-- C
+
+Loop:
+DSLL    R3, R1, 3       # R3 = i * 8
+DADDI   R4, R3, 2400    # R4 = 8i + &a = a[i]
+DADDI   R5, R3, 4800    # R5 = 8i + &b = b[i]
+LD      R6, 0(R5)       # R6 <-- b[i]
+DADD    R6, R6, R2      # R6 = b[i] + c
+SD      R6, 0(R4)       # a[i] <-- R6 = b[i] + c
+DADDI   R1, R1, 1       # i++
+DADDI   R7, R1, -100    # used to check that the counter has reached 100
+BNEZ    R7, Loop        # if R7 != 0, branch to loop
+SD      R1, 1200(R0)    # i <-- R1
+```
+
+
+####        while loop:
 
 ##  Single Cycle Datapath:
 
