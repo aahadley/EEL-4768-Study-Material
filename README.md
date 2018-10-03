@@ -374,19 +374,130 @@ Likewise,we need to calculate 32-but offsets for load, store, and branch instruc
 A shifter is added to easily multiply the address offset by 4.
 
 ![se](https://puu.sh/BESDl/697bf50093.png)
+
+---
 ---
 
 ###     Control Signals: (and format)
 
 #### RegDst:
+
+Chooses which set of bits will go to the write register.
+
+##### 0:
+bits [25 - 21] determine the write register.
+I - type instructions
+
+##### 1:
+bits [15 - 11] determine the write register.
+Used for R - Type instructions.
+
+--- 
+
 #### Jump:
+
+Chooses the next value of the program counter.
+
+##### 0:
+All instructions that are not JUMP
+
+##### 1:
+PC is determined by the jump address.
+
+JUMP instruction only
+
+---
+
 #### Branch:
+
+Chooses the next value of the program counter.
+
+##### 0:
+All instructions that are not BEQ.
+
+##### 1:
+PC is determined by the sign-extended branch address.
+
+BEQ instruction only.  
+
+*note* also requires ZERO to be asserted.
+
+---
+
 #### MemRead:
-#### MemtoReg:
-#### ALUOP:
+
+Allows the CPU to read from data memory.
+
+##### 0:
+All instructions that are not LOAD WORD
+
+##### 1:
+Asserted for LOAD WORD
+
+---
+
 #### MemWrite:
+Allows the CPU to write to data memory.
+
+##### 0:
+All instructions that are not STORE WORD
+
+##### 1:
+Sends Read Data 2 in **register file** to Write Data in **data memory**.
+
+Asserted for STORE WORD
+
+---
+
+#### MemtoReg:
+
+Determines which result to send to the register file.
+
+##### 0:
+Send **ALU result** to Write Data in the **register file.**
+
+##### 1:
+Sends Read Data in **data memory** to Write Data in **register file**.
+
+---
+
+#### ALUOP:
+
+determines the ALU operation.
+
+---
+
 #### ALUsrc:
+
+Determines the second input for the ALU.
+
+##### 0:
+Choose Read Data 2 as the second input.
+
+R-types and BEQ
+
+##### 1:
+Choose the sign extended immediate value as the second input.
+
+I-types
+
+---
+
 #### RegWrite:
+
+Allows the CPU to write to the register file.
+
+##### 0:
+Any instruction which does not require writing to the register file.
+
+##### 1:
+* R-types
+* ADDI
+* ANDI
+* ORI
+* LW
+
+---
 
 ![cs](https://puu.sh/BERp1/af1bfffa9d.png)
 
