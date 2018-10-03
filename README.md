@@ -158,10 +158,70 @@ Jump, Jump-and-Link
 > translate certain expression that includes variables and operations into assembly of one of
 architecture, i.e. load-store, or register-memory, stack etc., instructions will be provided in random order.
 
+High level code to translate:
+
+```C
+f = (a + b) * c / (e - d);
+```
+
 ###     Load-Store:
-###     Register-Memory:
+```
+LOAD    a
+ADD     b   # a + b
+STORE   a   # A <-- (a + b)
+LOAD    e
+SUB     d   # e - d
+STORE   e   # e <-- (e - d)
+LOAD    a
+MUL     c   # (a + b) * c
+DIV     e   # (a + b) * c / (e - d)
+STORE   a   # a <-- (a + b) * c / (e - d) should this be f?
+```
+
+---
+
 ###     Stack:
-###     ...
+```
+PUSH e      # ]e
+PUSH d      # ]e, d
+SUB         # ](e-d)
+PUSH a      # ](e-d), a
+PUSH b      # ](e-d), a, b
+ADD         # ](e-d), (a+b)
+PUSH c      # ](e-d), (a+b), c
+MUL         # ](e-d), (a+b)*c
+DIV         # ](a+b)*c / (e-d)
+POP         # ].
+```
+
+---
+
+###     Register-Memory:
+```
+LOAD    R1, a   
+ADD     R1, b       # R1 <-- a + b
+LOAD    R2, e   
+SUB     R2, d       # R2 <-- e - d
+MUL     R1, c       # R1 <-- (a + b) * c
+DIV     R1, R2      # R1 <-- (a + b) * c / (e - d)
+STORE   a, R2       # a <-- R2
+```
+
+---
+
+###     Load-Store
+```
+LOAD    R1, a       # R1  <-- a
+LOAD    R2, b       # R2  <-- b
+ADD     R1, R2      # R1 <-- a + b
+LOAD    R3, e       # R3 <-- e
+LOAD    R4, d       # R4 <-- d
+SUB     R3, R4      # R3 <-- e - d
+LOAD    R5, c       # R5 <-- c
+MUL     R1, R5      # R1 <-- (a + b) * c
+DIV     R1, R3      # R1 <-- (a + b) * c - (e - d)
+STORE   a, R1       # a  <-- R1
+```
 
 ---
 ---
