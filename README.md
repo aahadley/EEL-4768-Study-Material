@@ -378,6 +378,16 @@ A shifter is added to easily multiply the address offset by 4.
 
 ###     Control Signals: (and format)
 
+#### RegDst:
+#### Jump:
+#### Branch:
+#### MemRead:
+#### MemtoReg:
+#### ALUOP:
+#### MemWrite:
+#### ALUsrc:
+#### RegWrite:
+
 ![cs](https://puu.sh/BERp1/af1bfffa9d.png)
 
 ##  Modifying the datapath:
