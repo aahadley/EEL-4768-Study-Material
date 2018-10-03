@@ -6,88 +6,85 @@
 
 ###     ISA Definition:
 
-    An ISA consists of:
-    - List of all instructions 
-    - The format of the instructions
-    - The addressing modes.
-
+#### An ISA consists of:
+* List of all instructions 
+* The format of the instructions
+* The addressing modes.
 
 ###     ISA Classification/Comparison:
 
 ####        Accumulator:
 
-            Accumulator architectures were common in early CPUs when it was not possible to have a lot of
-            registers. The accumulator is used in all operations. It is not used anymore due to its
-            rigidity and long assembly code.
+</p> Accumulator architectures were common in early CPUs when it was not possible to have a lot of registers. The accumulator is used in all operations. It is not used anymore due to its rigidity and long assembly code. </p>
 
-            Pros:
-                - Simple compiler
-                - Simple hardware
-            Cons:
-                - Rigid
-                - Restrictive in parallelism
-                - Long assembly codes
+##### Pros:
+* Simple compiler
+* Simple hardware
+##### Cons:
+* Rigid
+* Restrictive in parallelism
+* Long assembly codes
 
-![ac](http://puu.sh/BEJ3e/e7b098f53e.png)
+
+![ac](https://puu.sh/BEJ3e/e7b098f53e.png)
 
 ####        Stack:
 
-            Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed.
-            Data from memory can be pushed to the stack and data on the stack can be popped into memory.
+</p> Used up to 1980s. The two ALU operands are popped from the stack, and the result is pushed. 
+Data from memory can be pushed to the stack and data on the stack can be popped into memory. </p>
 
-            Pros:
-                - Simple compiler
-                - Simple hardware
-            Cons:
-                - Restrictive in parallelism
-                - Long assembly codes
+##### Pros:
+* Simple compiler
+* Simple hardware
+##### Cons:
+* Restrictive in parallelism
+* Long assembly codes
 
-![st](http://puu.sh/BEJ3M/fed3ce44b7.png)
+
+![st](https://puu.sh/BEJ3M/fed3ce44b7.png)
 
 ####        Memory-Memory:
 
-            No registers are used. All data is kept in the computer's main memory. slow as hecc
+</p> No registers are used. All data is kept in the computer's main memory. slow as hecc </p>
 
-            Pros:
-                - Variables don't have to be allocated. Easy memory management
-            Cons:
-                - Every operation requires multiple memory accesses. (ew)
-                - Slow
+##### Pros:
+* Variables don't have to be allocated. Easy memory management
+##### Cons:
+* Every operation requires multiple memory accesses. (ew)
+* Slow
 
 ####        Register-Memory:
 
-            Operates directly on data within the memory. The ALU can take one input from the registers,
-            and one from memory, or it can take both operations from the registers.
+</p> Operates directly on data within the memory. The ALU can take one input from the registers, and one from memory, or it can take both operations from the registers. </p>
 
-            Pros:
-                - Data in memory can be accessed directly.
-                - Simple compiler
-                - Short code
-            Cons:
-                - Non-uniform instructions
-                - Some instructions require many clock cycles.
-                - Complex encoding
+##### Pros:
+* Data in memory can be accessed directly.
+* Simple compiler
+* Short code
+##### Cons:
+* Non-uniform instructions
+* Some instructions require many clock cycles.
+* Complex encoding
 
-![rm](http://puu.sh/BEJ4i/093b34401e.png)
+![rm](https://puu.sh/BEJ4i/093b34401e.png)
 
 ####        Load-Store:
 
-            Sometimes called register-register achitecture, the ALU takes both inputs from the registers.
-            As a result, it can't access memory directly.
+</p> Sometimes called register-register achitecture, the ALU takes both inputs from the registers.As a result, it can't access memory directly. </p>
 
-            Pros:
-                - Simple encoding
-                - Few bits required to specify registers.
-                - Uniform procesing.
-            Cons:
-                - Long Code
-                - Every variable requires load and store instructions.
+##### Pros:
+* Simple encoding
+* Few bits required to specify registers.
+* Uniform procesing.
+##### Cons:
+* Long Code
+* Every variable requires load and store instructions.
 
-![ls](http://puu.sh/BEJ4Y/5f242b7fd6.png)
+![ls](https://puu.sh/BEJ4Y/5f242b7fd6.png)
 
 ###     Big Endian vs Little Endian:
 
-        Big Endian:
+####        Big Endian:
             Data type ends at the big address.
 
             0x012EAC34                    "ABCD"
@@ -95,7 +92,7 @@
             | 01 | 2E | AC | 34 |       | A | B | C | D |
             +----+----+----+----+       +---+---+---+---+
 
-        Little Endian:
+####        Little Endian:
             Data type ends at the little address.
 
             0x012EAC34                  "ABCD"
@@ -105,14 +102,17 @@
 
 ###     Alignments:
 
-    Objects larger than 1 byte must be aligned.
-    An access to an object s at address A is aligned if A mod s = 0.
-    Misalignment is a problem because accessing a misaligned object may require access to multiple
-    aligned addresses.
+* Objects larger than 1 byte must be aligned.
+* An access to an object s at address A is aligned if A mod s = 0.
+* Misalignment is a problem because accessing a misaligned object may require access to multiple aligned addresses.
+
 
 ![fig](https://puu.sh/BEIJt/e36308fc1f.jpg)
 
 ###     Instruction Format:
+####        R-Type:
+####        I-Type
+####        J-Type
 
 ###     Fields:
 
@@ -299,14 +299,22 @@ SD      R1, 1200(R0)    # i <-- R1
 > Single Cycle datapath: features, restrictions, components, control signals for each instructions/ format
 (original datapath)
 
-![dp](http://puu.sh/BERqv/5b58a49b12.png)
+![dp](https://puu.sh/BERqv/5b58a49b12.png)
 
 ###     Features:
+
+* simple implementation
+* each instruction takes one clock cycle
+
 ###     Restrictions:
+
+* No parallelism
+* slooow
+
 ###     Components:
 ###     Control Signals: (and format)
 
-![cs](http://puu.sh/BERp1/af1bfffa9d.png)
+![cs](https://puu.sh/BERp1/af1bfffa9d.png)
 
 ##  Modifying the datapath:
 
