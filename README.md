@@ -137,19 +137,19 @@ will be included, in addition to the list of MIPS64 instructions.
 |a2 – b| < epsilon
 ```
 
-```M
+```assembly
 .data
 a:      .float 0.1
 b:      .float 0.01
 e:      .float 1.0e-7
 
 .text
-// load the addresses of variables into registers
+# load the addresses of variables into registers
 LA      R1, a
 LA      R2, b
 LA      R3, e
 
-// load into FPRs (single precision)
+# load into FPRs (single precision)
 L.S     F0, 0(R1)
 L.S     F1, 0(R2)
 L.S     F2, 0(R3)
@@ -168,7 +168,7 @@ not_quite
     Convert a floating point value to an integer,
     Add it to an integer register
 
-```
+```assembly
 cvt.w.s F31, F0
 mfc1    R2, F31
 add     R3, R1, R2
@@ -182,7 +182,7 @@ n = 0x11223344AABBCCDD
 ```
 
 ```assembly
-/* x represents a garbage value */
+# /* x represents a garbage value */
 .data
 n:      .word 0
 
@@ -190,20 +190,20 @@ n:      .word 0
 
 ...
 
-LUI     R1, 0x1122          /* R1 = xxxx xxxx 1122 0000 */
-ORI     R1, R1, 0x3344      /* R1 = xxxx xxxx 1122 3344 */
-DSLL32  R1, R1, 32          /* R1 = 1122 3344 0000 0000 */
-LUI     R2, 0xAABB          /* R2 = xxxx xxxx AABB 0000 */
-ORI     R2, R2, OxCCDD      /* R2 = xxxx xxxx AABB CCDD */
-DSLL32  R2, R2, 32          /* R2 = AABB CCDD 0000 0000 */
-DSRL32  R2, R2, 32          /* R2 = 0000 0000 AABB CCDD */
+LUI     R1, 0x1122          # R1 = xxxx xxxx 1122 0000
+ORI     R1, R1, 0x3344      # R1 = xxxx xxxx 1122 3344
+DSLL32  R1, R1, 32          # R1 = 1122 3344 0000 0000
+LUI     R2, 0xAABB          # R2 = xxxx xxxx AABB 0000
+ORI     R2, R2, OxCCDD      # R2 = xxxx xxxx AABB CCDD
+DSLL32  R2, R2, 32          # R2 = AABB CCDD 0000 0000
+DSRL32  R2, R2, 32          # R2 = 0000 0000 AABB CCDD
 
-                            /* R1 = 1122 3344 0000 0000  no change, just showing the values together */
-                            /* R2 = 0000 0000 AABB CCDD */
+                            # R1 = 1122 3344 0000 0000  no change, just showing the values together
+                            # R2 = 0000 0000 AABB CCDD
 
-OR      R1, R1, R2          /* R1 = 1122 3344 AABB CCDD */
+OR      R1, R1, R2          # R1 = 1122 3344 AABB CCDD
 LA      R30, n
-SD      R1, 0[R30]          /* store R1 at the address of n (syntax highlighting wants brackets, idk) */
+SD      R1, 0[R30]          # store R1 at the address of n (syntax highlighting wants brackets, idk)
 ```
 
 
