@@ -96,7 +96,7 @@
             +----+----+----+----+       +---+---+---+---+
 
         Little Endian:
-            Data tyoe ends at the little address.
+            Data type ends at the little address.
 
             0x012EAC34                  "ABCD"
             +----+----+----+----+       +---+---+---+---+
@@ -113,6 +113,7 @@
 ![fig](https://puu.sh/BEIJt/e36308fc1f.jpg)
 
 ###     Instruction Format:
+
 ###     Fields:
 
 ##  Architectures: (translating expressions to assembly)
@@ -131,6 +132,30 @@ architecture, i.e. load-store, or register-memory, stack etc., instructions will
 will be included, in addition to the list of MIPS64 instructions.
 
 ###     Translate c-like code into MIPS64:
+####        various examples
+```C
+|a2 – b| < epsilon 
+```
+
+```Assembly
+.data
+a:      .float 0.1
+b:      .float 0.01
+e:      .float 1.0e-7
+
+.text
+# load the addresses of variables into registers
+LA      R1, a
+LA      R2, b
+LA      R3, e
+
+# load into FPRs (single precision)
+L.S     F0, 0(R1)
+L.S     F1, 0(R2)
+L.S     F2, 0(R3)
+
+
+```
 ####        if-else:
 ####        while loop:
 ####        for loop:
