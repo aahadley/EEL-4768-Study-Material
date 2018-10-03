@@ -181,8 +181,8 @@ long long int n = 0;
 n = 0x11223344AABBCCDD
 ```
 
-```M
-// x represents a garbage value
+```assembly
+/* x represents a garbage value */
 .data
 n:      .word 0
 
@@ -190,20 +190,20 @@ n:      .word 0
 
 ...
 
-LUI     R1, 0x1122          // R1 = xxxx xxxx 1122 0000
-ORI     R1, R1, 0x3344      // R1 = xxxx xxxx 1122 3344
-DSLL32  R1, R1, 32          // R1 = 1122 3344 0000 0000
-LUI     R2, 0xAABB          // R2 = xxxx xxxx AABB 0000
-ORI     R2, R2, OxCCDD      // R2 = xxxx xxxx AABB CCDD
-DSLL32  R2, R2, 32          // R2 = AABB CCDD 0000 0000
-DSRL32  R2, R2, 32          // R2 = 0000 0000 AABB CCDD
+LUI     R1, 0x1122          /* R1 = xxxx xxxx 1122 0000 */
+ORI     R1, R1, 0x3344      /* R1 = xxxx xxxx 1122 3344 */
+DSLL32  R1, R1, 32          /* R1 = 1122 3344 0000 0000 */
+LUI     R2, 0xAABB          /* R2 = xxxx xxxx AABB 0000 */
+ORI     R2, R2, OxCCDD      /* R2 = xxxx xxxx AABB CCDD */
+DSLL32  R2, R2, 32          /* R2 = AABB CCDD 0000 0000 */
+DSRL32  R2, R2, 32          /* R2 = 0000 0000 AABB CCDD */
 
-                            // R1 = 1122 3344 0000 0000  no change, just showing the values together
-                            // R2 = 0000 0000 AABB CCDD
+                            /* R1 = 1122 3344 0000 0000  no change, just showing the values together */
+                            /* R2 = 0000 0000 AABB CCDD */
 
-OR      R1, R1, R2          // R1 = 1122 3344 AABB CCDD
+OR      R1, R1, R2          /* R1 = 1122 3344 AABB CCDD */
 LA      R30, n
-SD      R1, 0[R30]          // store R1 at the address of n (syntax highlighting wants brackets, idk)
+SD      R1, 0[R30]          /* store R1 at the address of n (syntax highlighting wants brackets, idk) */
 ```
 
 
