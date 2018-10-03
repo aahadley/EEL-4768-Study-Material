@@ -125,10 +125,33 @@ Data from memory can be pushed to the stack and data on the stack can be popped 
 
 ###     Instruction Format:
 ####        R-Type:
+Register instructions
+
+       6      5     5     5     5      6   
+    +------+-----+-----+-----+-----+------+
+    |opcode| rs  | rt  | rd  |shamt| funct|
+    +------+-----+-----+-----+-----+------+
+
 ####        I-Type
+Loads, Stores, Immediates
+
+       6      5     5          16
+    +------+-----+-----+----------------+
+    |opcode| rs  | rt  |    immediate   |
+    +------+-----+-----+----------------+
+
 ####        J-Type
 
-###     Fields:
+Jump, Jump-and-Link
+
+       6               26
+    +------+--------------------------+
+    |opcode| offset to be added to PC |
+    +------+--------------------------+
+
+---
+---
+---
 
 ##  Architectures: (translating expressions to assembly)
 
