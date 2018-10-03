@@ -179,7 +179,7 @@ add     R3, R1, R2
 ```C
 // Load the 64-bit number 0x11223344 AABBCCDD to n.
 
-__int64_t n = 0;    // equivalent to long long, used for specificity
+__int64_t n = 0;    // equivalent to long long in UNIX, used for specificity
 n = 0x11223344AABBCCDD
 ```
 
@@ -299,10 +299,14 @@ SD      R1, 1200(R0)    # i <-- R1
 > Single Cycle datapath: features, restrictions, components, control signals for each instructions/ format
 (original datapath)
 
+![dp](http://puu.sh/BERqv/5b58a49b12.png)
+
 ###     Features:
 ###     Restrictions:
 ###     Components:
 ###     Control Signals: (and format)
+
+![cs](http://puu.sh/BERp1/af1bfffa9d.png)
 
 ##  Modifying the datapath:
 
