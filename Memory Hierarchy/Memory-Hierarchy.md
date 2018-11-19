@@ -1,4 +1,4 @@
-# Memory Hierarchy
+# Memory Hierarchy 
 https://courses.cs.washington.edu/courses/cse378/09wi/lectures.html
 
 ## Hierarchy Overview
@@ -53,7 +53,7 @@ Time taken to copy memory after a miss.
 ---
 
 ## Cache Memory
-https://courses.cs.washington.edu/courses/cse378/09wi/lectures/lec15.pdf
+https://courses.cs.washington.edu/courses/cse378/09wi/lectures/lec15.pdf  
 The level of memory closest to CPU
 
 ### Direct-Mapped Cache
@@ -85,6 +85,52 @@ Now we can use the rest of the address bits, called the *tag* to determine if th
 
 ####    Replacement Policies
 What happens when the cache fills up? We have to overwrite something, but what?
-//TODO
 
-####    Cache Size
+#####   LRU - Least Recently Used
+The least recently used address is evicted first. This is helpful because recently used addresses are likely to be accessed again soon.
+
+#####   FIFO - First In First Out
+Each set acts as a queue. The first address placed in the queue will be evicted first.
+
+#####   Random
+Self explanatory. Just pick a random block to evict.
+
+####    Location Within the Cache
+
+For an m-bit address:
+
+            (m-k-n) bits         k bits   n bits
+    +--------------------------+---------+------+
+    |            Tag           |  Index  |Offset|
+    +--------------------------+---------+------+
+
+    where n is the number of bits required to enumerate each byte in a block,
+          k is the number of bits required to enumerate each block.
+
+Offset:     address *mod* 2<sup>n</sup>  
+
+Index:      (address / 2<sup>n</sup>) *mod* 2<sup>k</sup>  
+
+Tag:        address / m
+
+Number of bits in the cache:  (number of blocks) * [(Valid bit) + (tag) + (data)] 
+
+##### Example:
+
+32 bit address:
+
+    +------------------------+------+--+
+    |            24          |  6   |2 |
+    +------------------------+------+--+
+
+    4 bytes per block, so n = 2.  
+    64 blocks, so k = 6  
+    32 - 6 - 2 = 24.  
+
+### Cache Misses
+A cache miss happens when an access is attempted, but not found in the cache.  
+
+#### Sources of Cache Misses
+##### Compulsory
+- Capacity
+- Collision Conflict
