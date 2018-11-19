@@ -131,6 +131,7 @@ Number of bits in the cache:  (number of blocks) * [(Valid bit) + (tag) + (data)
 A cache miss happens when an access is attempted, but not found in the cache.  
 
 #### Sources of Cache Misses
+
 ##### Compulsory
-- Capacity
-- Collision Conflict
+##### Capacity
+##### Collision Conflict
