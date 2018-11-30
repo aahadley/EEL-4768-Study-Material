@@ -74,8 +74,45 @@ The value of $t0 isn't updated until cycle 5, but it is read at cycle 3, so we g
 
 We can avoid this by adding a stall in the datapath. We represent this with a "nop" (no operation)
 
+Cycle   | IF    | ID    | EX    | MEM   | WB    | 
+--------|-------|-------|-------|-------|-------|
+1       |  add  |       |       |       |       |
+2       | *nop* |  add  |       |       |       |
+3       | *nop* | *nop* |  add  |       |       |
+4       |  sub  | *nop* | *nop* |  add  |       |
+5       |       |**sub**| *nop* | *nop* |**add**|
+6       |       |       |  sub  | *nop* | *nop* |
+7       |       |       |       |  sub  | *nop* |
+8       |       |       |       |       |  sub  |
+
 ### Structural Hazard
 Occurs when two instructions need to access a particular component, such as memory.
+
+#### Example
+
+```asm
+//Naming each instruction to make the diagram clearer.
+
+lw $1, 100($0)  //A
+lw $2, 200($0)  //B
+lw $3, 300($0)  //C
+lw $4, 200($0)  //D
+```
+Cycle   | IF    | ID    | EX    | MEM   | WB    |
+--------|-------|-------|-------|-------|-------|
+1       |   A   |       |       |       |       |
+2       |   B   |   A   |       |       |       |
+3       |   C   |   B   |   A   |       |       |
+4       | **D** |   C   |   B   | **A** |       |
+5       |       |   D   |   C   |   B   |   A   |
+...     |       |       |       |       |       |
+
+In cycle 4, D has to fetch the instruction from memory, while A needs to load a word from memory. Memory cannot be accessed by two differet components in the same clock cycle, so we end up with a structural hazard.  
+
+We can solve this problem by having separate memories for instructions and data. Otherwise, we could use nops or forwarding.
+
+### Control Hazard
+An if-else statements are used to make branch decisions in a program. An instruction may enter the pipeline before a branch decision is made, resulting in incorrect calulations or illegal memory acesses. This is called a control hazard.
 
 ---
 
