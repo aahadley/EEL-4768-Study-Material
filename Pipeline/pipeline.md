@@ -147,7 +147,7 @@ The pipeline contains a set of registers at each stage called pipeline registers
 To do this, a new hardware unit must be added called the forwarding unit. If a hazard is detected, it switches a multiplexor, which causes the ALU to take its input from the pipeline register, rather than the register file.
 
 ### Reordering Instructions
-The order of two consecutive instructions can be swapped when neither uses the result of the other.
+- The order of two consecutive instructions can be swapped when neither uses the result of the other.
 
 #### Example
 
@@ -163,9 +163,10 @@ and does not depend on the result of lw, so these **can** be swapped.
 add $t0, $t1, $t2
 sub $t3, $t0, $t4
 ```
-sub depends on the result of add ($t0), so these **cannot** be swapped.
+sub depends on the result of add ($t0), so these **cannot** be swapped.  
 
-However, instructions can't be swapped if they write to the same register.
+
+- However, instructions can't be swapped if they write to the same register.
 
 ```asm
 add $t0, $t1, $t2
@@ -173,8 +174,55 @@ sub $t0, $t3, $t4
 ```
 Both of these write to $t0, so they can't be swapped.
 
-### Branch Prediction
+### Control Hazards and Branch Prediction
 
+Returning to a previous example,  
+
+```asm
+  lw  $6, 0($10)
+  lw  $7, 0($11)
+  add $1, $2, $3
+  beq $0, $1, label
+  sub $2, $3, $4
+
+label:
+  or  $3, $4, $5
+```
+
+Cycle   | IF    | ID    | EX    | MEM   | WB    | 
+--------|-------|-------|-------|-------|-------|
+1       |  lw   |       |       |       |       |
+2       |  lw   |  lw   |       |       |       |
+3       |  add  |  lw   |  lw   |       |       |
+4       |**beq**|  add  |  lw   |  lw   |       |
+5       |  sub  |**beq**|  add  |  lw   |  lw   |
+6       |  ???                                  |
+
+Instead of stalling clock cycle 6, and waiting for the condition to be evaluated, we could make a prediction about the condition, and proceed according to that prediction. If the prediction was correct, yay us! Otherwise discard the result and recalculate.  
+
+But how do we predict which branch to take without evaluating the instruction?  
+
+### Evaluate Branch in ID stage
+  - With this approach, we add a comparator to the ID stage, so that beq instructions can be evaluated right away.
+  - This also requires that we add a forwarding unit to the ID stage.
+  - This doesn't completely eliminate stalls, because there's still the chance of a data dependency in the branch instruction.
+
+### Delay Slots
+Another option is to move useful instructions below the branch.  
+
+  - This requires that the pipeline structure must be encoded into the ISA.
+  - This also requires that an instruction above the branch  
+
+### Predict Branch Untaken
+  - Assume that most branches will be untaken
+  - Predict every time that the branch will be untaken
+  - We will be correct most of the time, and only waste a few clock cycles whenever the branch is taken.
+
+### Hardware Branch Prediction
+
+#### Pattern History Table
+
+#### Smith Counter
 
 ---
 
