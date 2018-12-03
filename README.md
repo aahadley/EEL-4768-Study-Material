@@ -1,3 +1,11 @@
+Aaron Hadley  
+aahadley1@gmail.com  
+
+Study Material for EEL 4768 Computer Architecture  
+Fall 2018  
+Instructor: Suboh Suboh  
+University of Central Florida  
+
 # Review Material
 
 ## [Exam 1](https://github.com/aahadley/EEL-4768-Study-Material/blob/master/Exam%201/Exam1Review.md)
