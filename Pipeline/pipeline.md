@@ -174,7 +174,9 @@ sub $t0, $t3, $t4
 ```
 Both of these write to $t0, so they can't be swapped.
 
-### Control Hazards and Branch Prediction
+---
+
+## Control Hazards and Branch Prediction
 
 Returning to a previous example,  
 
@@ -220,9 +222,28 @@ Another option is to move useful instructions below the branch.
 
 ### Hardware Branch Prediction
 
-#### Pattern History Table
+#### Pattern History Table (with 1-bit counter)
+In this approach, we'll create a table that directly maps each address to a single bit. Typically, we will have some fixed number of counters, and use some specified bits in the address as a hash function to determine which counter to use.  
 
-#### Smith Counter
+- When a branch is taken, set its corresponding bit to 1.
+- When a branch is not taken, set its corresponding bit to 0.
+- At each branch, check its corresponding bit.
+  - if bit == 1 predict taken
+  - if bit == 0 predict not taken
+
+This is a simple approach, but not very accurate. A more sophisticated approach might yield better results.
+
+#### Smith Counter (n-bit counter)
+Sometimes called an n-bit saturated counter, the Smith counter works similarly to the 1-bit counter.
+- When a branch is taken, increment the counter.
+- When a branch is not taken, decrement the counter.
+
+- At each branch, check its corresponding counter.
+  - if branch < 2<sup>n-1</sup> predict taken
+  - if branch >= 2<sup>n-1</sup> predict not taken
+  - This could be accomplished by simply checking the most significant bit.
+
+*It should be noted that we never allow our counters to overflow. That is to say, adding to a counter at its maximum value will not change its value, nor will subtracting from a counter at its minimum value.*
 
 ---
 
